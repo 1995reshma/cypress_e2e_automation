@@ -149,6 +149,33 @@ Run tests & generate reports using the `cypress-mochawesome-reporter` plugin:
 npm run test
 ```
 
+### Covering Note (Technology Choices)
+I chose Cypress + Cucumber (BDD) using the @badeball preprocessor.
+
+Why this stack ? 
+
+**Fast feedback & reliability:** Cypress’s built-in retryability and time-traveling debugger make authoring and triaging tests quick.
+
+**Readable specs:** Gherkin (Given/When/Then) keeps scenarios business-friendly and reviewable by non-engineers.
+
+**Maintainability:** A lightweight Page Object pattern isolates selectors and actions; step definitions stay small and reusable.
+
+**Actionable reports:** Mochawesome HTML reports with embedded screenshots on failure.
+
+**Structure & conventions**
+
+1. Features live in cypress/e2e/features, steps in cypress/support/step_definitions.
+
+2. Tags drive suites: @smoke for quick checks, @regression for deeper coverage.
+
+3. Custom commands (e.g., login) reduce duplication and speed up flows.
+
+**Trade-offs**
+
+1. Playwright offers faster, broader browser coverage; however, Cypress’s DX and ecosystem fit this project’s scope well.
+
+2. I avoided fixtures since test data is simple and supplied via cypress.env.json; this reduces file churn.
+
 ---
 
 This README provides a detailed guide to setting up, using, and troubleshooting the Cypress + Cucumber BDD + POM framework. 🚀 Let me know if you need any modifications!
