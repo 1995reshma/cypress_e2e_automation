@@ -10,9 +10,6 @@ cypress/videos/
 cypress/screenshots/
 cypress/downloads/
 
-# Env files (do not commit secrets)
-cypress.env.json
-
 # IDE settings
 .vscode/
 .idea/
