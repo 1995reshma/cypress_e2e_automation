@@ -51,18 +51,25 @@ const { createEsbuildPlugin } = require("@badeball/cypress-cucumber-preprocessor
 
 module.exports = defineConfig({
   e2e: {
-    specPattern: "**/*.feature",
+    specPattern: "cypress/e2e/features/*.feature",
+    screenshotOnRunFailure: true,
+    video : false,
+    baseUrl: "https://www.saucedemo.com/",
+    supportFile: "cypress/support/e2e.js",
     async setupNodeEvents(on, config) {
       await addCucumberPreprocessorPlugin(on, config);
       require("cypress-mochawesome-reporter/plugin")(on);
       on(
-        "file:preprocessor",
-        createBundler({
-          plugins: [createEsbuildPlugin(config)],
-        })
-      );
+          "file:preprocessor",
+          createBundler({
+            plugins: [createEsbuildPlugin(config)],
+          })
+        );
       return config;
     },
+  },
+  cucumber: {
+    stepDefinitions: ["cypress/support/step_definitions/**/*.{js,ts}"],
   },
 });
 ```
@@ -81,20 +88,24 @@ Create a feature file with the following content:
 Feature: Login Functionality
 
   @smoke
-  Scenario: User logs in with valid credentials
-    Given I visit the login page
-    When I enter valid credentials
-    And I click the login button
-    Then I verify the title of the application
+  Scenario: Verify successful login
+    Given the user navigates to the saucedemo website
+    When the user enters the valid username and password
+    And clicks the Login button
+    Then the user verifies the url of the home page
 ```
 
 #### **Step 8: Create a Step Definition File (`loginPageSteps.js`)**
 Implement the following step definition (repeat for other steps as needed):
 
 ```javascript
-Given("I visit the login page", () => {
-   cy.visit("https://automationexercise.com/");
-});
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
+import {Given as And } from "@badeball/cypress-cucumber-preprocessor";
+import LoginPage from "../../pages/LoginPage";
+
+Given("the user navigates to the saucedemo website",()=>{
+    LoginPage.visitLoginPage();
+})
 ```
 
 #### **Step 9: (Optional) Organizing Tests with Page Object Model (POM)**
@@ -104,16 +115,21 @@ Create `cypress/pages/LoginPage.js` and define methods:
 
 ```javascript
 class LoginPage {
-  visit() {
-    cy.visit("https://automationexercise.com/");
+  loginPageElement = {
+    userName : "#user-name",
+    password : "#password",
+    loginBtn : "#login-button"
   }
 
-  enterUsername(username) {
-    cy.get('[data-test="username"]').type(username);
+  visitLoginPage(){
+    cy.visit("/");
+  }
+
+  enterUserName(userNameData) {
+    cy.get(this.loginPageElement.userName).type(userNameData);
   }
 }
-
-export default LoginPage;
+export default new LoginPage();
 ```
 
 ---
@@ -128,7 +144,7 @@ npx cypress open
 ### 📊 Generating Test Reports (Mochawesome)
 Run tests & generate reports using the `cypress-mochawesome-reporter` plugin:
 ```sh
-npx cypress run
+npm run test
 ```
 
 ---
