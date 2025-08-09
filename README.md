@@ -38,7 +38,9 @@ npm install @bahmutov/cypress-esbuild-preprocessor --save-dev
 ```
 
 #### **Step 4: Install cypress-mochawesome-reporter plugin**
+```sh
 npm install --save-dev cypress-mochawesome-reporter
+```
 
 #### **Step 5: Configure Cypress to Use Cucumber**
 Update `cypress.config.js` to include the Cucumber preprocessor.
