@@ -21,7 +21,6 @@ module.exports = defineConfig({
     baseUrl: "https://www.saucedemo.com/",
     supportFile: "cypress/support/e2e.js",
     async setupNodeEvents(on, config) {
-      console.log("CYPRESS TAGS:", config.env && config.env.TAGS);
       await addCucumberPreprocessorPlugin(on, config);
       require("cypress-mochawesome-reporter/plugin")(on);
       on(

@@ -8,8 +8,7 @@
     "clean:reports": "rmdir /s /q cypress\\reports\\mochawesome-report",
     "test": "npm run clean:reports && cypress run --reporter cypress-mochawesome-reporter",
     "test:smoke": "npx cypress run --spec \"**/*.feature\" --env TAGS=\"@smoke\" --browser chrome --headless",
-    "test:regression": "npx cypress run --spec \"**/*.feature\" --env TAGS=\"@regression\" --browser chrome --headless",
-    "test:regression-debug": "cross-env DEBUG=cypress:* cypress run --env TAGS='@regression' --browser chrome"
+    "test:regression": "npx cypress run --spec \"**/*.feature\" --env TAGS=\"@regression\" --browser chrome --headless"
   },
   "keywords": [],
   "author": "",
