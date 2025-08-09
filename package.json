@@ -1,0 +1,27 @@
+{
+  "name": "cypress_e2e_automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:report": "cypress run",
+    "clean:reports": "rmdir /s /q cypress\\reports\\mochawesome-report",
+    "test": "npm run clean:reports && cypress run --reporter cypress-mochawesome-reporter",
+    "test:smoke": "npx cypress run --spec \"**/*.feature\" --env TAGS=\"@smoke\" --browser chrome --headless",
+    "test:regression": "npx cypress run --spec \"**/*.feature\" --env TAGS=\"@regression\" --browser chrome --headless",
+    "test:regression-debug": "cross-env DEBUG=cypress:* cypress run --env TAGS='@regression' --browser chrome"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^22.2.0",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.5",
+    "cypress": "^14.5.4",
+    "cypress-mochawesome-reporter": "^3.8.4"
+  },
+  "dependencies": {
+    "-": "^0.0.1",
+    "save-dev": "^0.0.1-security"
+  }
+}
