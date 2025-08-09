@@ -8,6 +8,7 @@ yarn-error.log*
 cypress/reports/
 cypress/videos/
 cypress/screenshots/
+cypress/downloads/
 
 # Env files (do not commit secrets)
 cypress.env.json
