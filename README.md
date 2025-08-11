@@ -1,5 +1,5 @@
 # 🚀 Overview
-This project is an automated testing framework built with Cypress, Cucumber BDD, and Page Object Model (POM). It enables behavior-driven development (BDD) for writing test cases in a human-readable format using Gherkin syntax.
+This project is an end to end automated testing framework built with Cypress, Cucumber BDD, and Page Object Model (POM). It enables behavior-driven development (BDD) for writing test cases in a human-readable format using Gherkin syntax.
 
 ## 📌 Tech Stack
 - **Cypress** - JavaScript-based end-to-end testing framework
